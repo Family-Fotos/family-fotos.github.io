@@ -7,7 +7,7 @@
       </div>
       <v-card>
         <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
+          {{ title }}
         </v-card-title>
         <v-card-text>
           <p>
@@ -89,5 +89,17 @@ export default {
     Logo,
     VuetifyLogo,
   },
+  head: {
+    title: 'Home page'
+  },
+  data() {
+    return {
+      title: ''
+    }
+  },
+  async mounted() {
+    const { title } = await this.$content('home').only(['title']).fetch()
+    this.title = title;
+  }
 }
 </script>
